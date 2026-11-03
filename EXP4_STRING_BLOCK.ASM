@@ -1,4 +1,43 @@
-;=======================================================================
+; EXPERIMENT 3
+; Array Operations Using Indirect Addressing
+; 8086 Microprocessor
+
+ORG 100H
+
+; Initialize array
+MOV BYTE PTR [3000H], 05H
+MOV BYTE PTR [3001H], 10H
+MOV BYTE PTR [3002H], 15H
+MOV BYTE PTR [3003H], 20H
+MOV BYTE PTR [3004H], 25H
+
+; Array Addition
+MOV SI, 3000H
+MOV CX, 05
+MOV AX, 0000H
+
+NEXT:
+MOV BL, [SI]
+MOV BH, 00H
+ADD AX, BX
+INC SI
+LOOP NEXT
+
+MOV [2000H], AX
+
+; Array Copy
+MOV SI, 3000H
+MOV DI, 4000H
+MOV CX, 05
+
+COPY:
+MOV AL, [SI]
+MOV [DI], AL
+INC SI
+INC DI
+LOOP COPY
+
+HLT;=======================================================================
 ; EXPERIMENT 4 : STRING AND BLOCK DATA OPERATIONS USING 8086
 ; Processor    : 8086
 ; Simulator    : EMU8086  /  MASM or TASM under DOSBox
